@@ -1,6 +1,6 @@
-const { tokens, voiceChannelId } = require('./config.json');
+const { tokens } = require('./config.json');
 const createBot = require('./voiceBot');
 
-tokens.forEach(token => {
-  createBot(token, voiceChannelId);
-});
+const bots = tokens.map(token => createBot(token));
+
+module.exports = bots;
