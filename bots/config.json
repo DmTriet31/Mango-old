@@ -1,10 +1,12 @@
 {
   "tokens": [
-    "BOT1_TOKEN",
-    "BOT2_TOKEN",
-    "BOT3_TOKEN",
-    "BOT4_TOKEN",
-    "BOT5_TOKEN"
+    "TOKEN_BOT_1",
+    "TOKEN_BOT_2",
+    "TOKEN_BOT_3",
+    "TOKEN_BOT_4",
+    "TOKEN_BOT_5"
   ],
-  "voiceChannelId": "VOICE_CHANNEL_ID"
+  "voiceChannelId": "",
+  "prefix": ".",
+  "controllerToken": "TOKEN_BOT_1"
 }
