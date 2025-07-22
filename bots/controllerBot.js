@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits } = require('discord.js');
-const { prefix, controllerToken, tokens } = require('bots/config.json');
+const { prefix, controllerToken, tokens } = require('/config.json');
 const bots = require('./multiVoice'); // Danh sách 5 bot phụ
 
 const client = new Client({
