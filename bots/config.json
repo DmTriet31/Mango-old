@@ -1,0 +1,10 @@
+{
+  "tokens": [
+    "BOT1_TOKEN",
+    "BOT2_TOKEN",
+    "BOT3_TOKEN",
+    "BOT4_TOKEN",
+    "BOT5_TOKEN"
+  ],
+  "voiceChannelId": "VOICE_CHANNEL_ID"
+}
