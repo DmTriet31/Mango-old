@@ -1,4 +1,4 @@
-const { Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require('discord.js');
 
 module.exports = (client) => {
   client.on(Events.GuildMemberAdd, async member => {
@@ -34,7 +34,8 @@ module.exports = (client) => {
         .setStyle(ButtonStyle.Primary)
     );
 
-    await channel.send({
+    // GỬI TIN NHẮN + LƯU LẠI MESSAGE
+    const sentMessage = await channel.send({
       content: `🎉 Chào mừng <@${member.id}> đã đến với server, <@&1376211241915125813> có member mới nè!`,
       embeds: [embed],
       components: [row]
@@ -50,7 +51,7 @@ module.exports = (client) => {
 
     const collector = sentMessage.createMessageComponentCollector({
       componentType: ComponentType.Button,
-      time: 5 * 60 * 1000 // hoạt động trong 1 phút
+      time: 5 * 60 * 1000 // hoạt động trong 5 phút
     });
 
     collector.on('collect', async interaction => {
@@ -62,7 +63,7 @@ module.exports = (client) => {
         });
       }
     });
-    // Khi collector kết thúc, disable hết nút trong message
+
     collector.on('end', async () => {
       const disabledRow = new ActionRowBuilder().addComponents(
         row.components.map(button =>
