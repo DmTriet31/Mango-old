@@ -1,5 +1,14 @@
 {
-    "token": "",
+  "token": "",
+  "controllerToken": "x.GNzAo_.2af7WIyDZ-jZsp-AMUcvolxzRUw-LNBPXRpTq8",
+  "tokens": [
+    "x.GNzAo_.2af7WIyDZ-jZsp-AMUcvolxzRUw-LNBPXRpTq8",
+    "x.G1OQO0.UKNBSd1d7cdIzQv5-yoHhAMV4io8sHBADuHNfU",
+    "x.G1tnas.nR-JSWYFk9gsU1EikCTOk17ai-V-iqmAcztVuk",
+    "x.GhAtxh.sL-4luhHWwVjuo3bs5cGVXkJutzTmh2fNIHNe8",
+    "x.GqZxgS.nws5AEwj7wndxAA3DfNneaTM1WHH7AWPCZTXec"
+  ],
+  "voiceChannelId": "1393182163230392370",
     "language": "en",
     "prefix": "!",
     "mongodbUri": "",
