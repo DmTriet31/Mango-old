@@ -1,11 +1,23 @@
-const { Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require('discord.js');
+const {
+  Events,
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ComponentType
+} = require('discord.js');
 
 module.exports = (client) => {
-  client.on(Events.GuildMemberAdd, async member => {
+  client.on(Events.GuildMemberAdd, async (member) => {
+    console.log(`[✅] Thành viên mới: ${member.user.tag}`);
+
     const channel = member.guild.channels.cache.find(
       ch => ch.name === 'welcome' || ch.id === '1376211389324202177'
     );
-    if (!channel) return;
+    if (!channel) {
+      console.warn('[⚠️] Không tìm thấy kênh welcome.');
+      return;
+    }
 
     const embed = new EmbedBuilder()
       .setColor(0xff4757)
@@ -25,21 +37,26 @@ module.exports = (client) => {
       new ButtonBuilder()
         .setLabel('.gg/radiantlotus')
         .setStyle(ButtonStyle.Link)
-        .setURL('https://discord.com/channels/1369830175700942959/1376211346294833152') // Link mời của server
-        .setEmoji('<a:RL_62802:1376215865036636182>'),
-    
-    new ButtonBuilder()
+        .setURL('https://discord.com/channels/1369830175700942959/1376211346294833152')
+        .setEmoji('🌐'),
+
+      new ButtonBuilder()
         .setCustomId('greet_member')
         .setLabel('👋 Chào member')
         .setStyle(ButtonStyle.Primary)
     );
 
-    // GỬI TIN NHẮN + LƯU LẠI MESSAGE
-    const sentMessage = await channel.send({
-      content: `🎉 Chào mừng <@${member.id}> đã đến với server, <@&1376211241915125813> có member mới nè!`,
-      embeds: [embed],
-      components: [row]
-    });
+    let sentMessage;
+    try {
+      sentMessage = await channel.send({
+        content: `🎉 Chào mừng <@${member.id}> đã đến với server, <@&1376211241915125813> có member mới nè!`,
+        embeds: [embed],
+        components: [row]
+      });
+    } catch (err) {
+      console.error('[❌] Gửi tin nhắn welcome thất bại:', err);
+      return;
+    }
 
     const greetings = [
       `Chào mừng <@${member.id}> đến với Radiant Lotus! 🌸`,
@@ -51,16 +68,21 @@ module.exports = (client) => {
 
     const collector = sentMessage.createMessageComponentCollector({
       componentType: ComponentType.Button,
-      time: 5 * 60 * 1000 // hoạt động trong 5 phút
+      time: 5 * 60 * 1000 // 5 phút
     });
 
-    collector.on('collect', async interaction => {
+    collector.on('collect', async (interaction) => {
+      console.log(`[🧪] Nút được bấm: ${interaction.customId} bởi ${interaction.user.tag}`);
       if (interaction.customId === 'greet_member') {
         const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-        await interaction.reply({
-          content: `<@${interaction.user.id}> nói: ${randomGreeting}`,
-          ephemeral: false
-        });
+        try {
+          await interaction.reply({
+            content: `<@${interaction.user.id}> nói: ${randomGreeting}`,
+            ephemeral: false
+          });
+        } catch (err) {
+          console.error('[❌] Không thể phản hồi interaction:', err);
+        }
       }
     });
 
@@ -70,7 +92,12 @@ module.exports = (client) => {
           ButtonBuilder.from(button).setDisabled(true)
         )
       );
-      await sentMessage.edit({ components: [disabledRow] });
+      try {
+        await sentMessage.edit({ components: [disabledRow] });
+      } catch (err) {
+        console.error('[❌] Không thể cập nhật message sau khi hết hạn:', err);
+      }
+      console.log('[🛑] Collector đã kết thúc.');
     });
   });
 };
