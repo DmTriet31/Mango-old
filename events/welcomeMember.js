@@ -38,7 +38,7 @@ module.exports = (client) => {
         .setLabel('.gg/radiantlotus')
         .setStyle(ButtonStyle.Link)
         .setURL('https://discord.com/channels/1369830175700942959/1376211346294833152')
-        .setEmoji('🌐'),
+        .setEmoji('<a:RL_love:1376215865036636182>'),
 
       new ButtonBuilder()
         .setCustomId('greet_member')
