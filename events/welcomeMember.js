@@ -101,5 +101,5 @@ module.exports = (client) => {
     console.error('[❌] Không thể cập nhật message sau khi hết hạn:', err);
   }
   console.log('[🛑] Collector đã kết thúc và chỉ vô hiệu hoá nút greet_member.');
+  });
 });
-
