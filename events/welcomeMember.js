@@ -103,3 +103,4 @@ module.exports = (client) => {
   console.log('[🛑] Collector đã kết thúc và chỉ vô hiệu hoá nút greet_member.');
   });
 });
+};
