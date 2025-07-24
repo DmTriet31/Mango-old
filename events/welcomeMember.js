@@ -86,11 +86,12 @@ module.exports = (client) => {
       }
     });
 
-    collector.on('end', async () => {
+       collector.on('end', async () => {
       const disabledRow = new ActionRowBuilder().addComponents(
-        row.components.map(button =>
-          ButtonBuilder.from(button).setDisabled(true)
-        )
+        row.components.map(button => {
+          if (!button.customId) return button; // nút link giữ nguyên, không disable
+          return ButtonBuilder.from(button).setDisabled(true); // disable nút có customId
+        })
       );
       try {
         await sentMessage.edit({ components: [disabledRow] });
