@@ -153,16 +153,7 @@ const serverBannerURL = "https://cdn.discordapp.com/attachments/1376211384626446
 const welcomeEmbed = new EmbedBuilder()
     .setTitle("୨ <:RL_Lounge_bow:1376217725994663957> ୧〃 ➜ *Thành viên mới*")
 .setDescription(
-  `╭───────<a:RL_rainletter:1376249938316624044>────────❥\n` +
-  `*${member}* đã tham gia server! ﹒ ><a:RL_pinkheart:1376249583847477372>\n\n` +
-  `╭─ Hướng dẫn\n` +
-  `> <a:RL_rainbowchloe:1376245313853063250> [Kênh Chat Fa](https://discord.com/channels/1367120428648108042/1367506963696713891) ・ ` +
-  `<a:RL_bow_purple:1376245422426685491> [Chơi Bot](https://discord.com/channels/1367120428648108042/1367120830785519687) ・ ` +
-  `<a:RL_rainbowangie:1376246689190514811> [Tìm đồng đội](https://discord.com/channels/1367120428648108042/1367120810170515507)\n` +
-  `> <a:RL_77:1376216822197784587> [Đọc qua luật](https://discord.com/channels/1367120428648108042/1367499798068072599) ・ ` +
-  `<a:RL_77:1376216822197784587> [Tạo Voice Chat](https://discord.com/channels/1367120428648108042/1367120774300700763)\n` +
-  `╰───────<a:RL_rainletter:1376249938316624044>────────❥`
-)
+  `*${member}* đã tham gia server! ﹒ ><a:RL_pinkheart:1376249583847477372>`)
     .setColor(Math.floor(Math.random() * 16777215))
     .setThumbnail(user.displayAvatarURL({ dynamic: true }))
     .setImage(serverBannerURL)
@@ -244,3 +235,4 @@ module.exports = async function memberJoinHandler(client) {
         }
     });
 };
+
