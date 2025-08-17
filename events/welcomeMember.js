@@ -21,7 +21,7 @@ module.exports = (client) => {
 
     const embed = new EmbedBuilder()
       .setColor(0xff4757)
-      .setTitle('<a:RL_rainbowchloe:1376245313853063250> Welcome To Radiant Lotus <a:RL_rainbowchloe:1376245313853063250>')
+      .setTitle('<a:RL_rainbowchloe:1376245313853063250> Welcome To Mango <a:RL_rainbowchloe:1376245313853063250>')
       .setDescription(
         `Chúc bạn có những khoảng khắc vui vẻ và gắn kết với mọi người khi tham gia server, đừng ngần ngại trò chuyện và kết bạn với các thành viên khác nhé.\n\n` +
         `Hãy thoải mái tham gia các cuộc trò chuyện, đóng góp ý tưởng và cùng nhau xây dựng 1 cộng đồng vui vẻ và đoàn kết. ` +
@@ -29,7 +29,7 @@ module.exports = (client) => {
       )
       .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
       .setFooter({
-        text: `Radiant Lotus • ${new Date().toLocaleTimeString()}`,
+        text: `Mango • ${new Date().toLocaleTimeString()}`,
         iconURL: 'https://cdn.discordapp.com/attachments/1378063153027612884/1406730386905759906/913854ac485948c075b583f73908bbca.jpg?ex=68a38744&is=68a235c4&hm=bc91a610d16608df083e6372fba716676ba5badf8a460d0de9776eac773f9842&'
       });
 
@@ -59,7 +59,7 @@ module.exports = (client) => {
     }
 
     const greetings = [
-      `Chào mừng <@${member.id}> đến với Radiant Lotus! 🌸`,
+      `Chào mừng <@${member.id}> đến với Mango! 🌸`,
       `Heyy <@${member.id}>! Mong bạn sẽ có khoảng thời gian tuyệt vời tại đây 💫`,
       `<@${member.id}>, rất vui khi bạn tham gia với chúng tôi 😄`,
       `Yay <@${member.id}> đã đến, cùng vui chơi nào! 🎉`,
