@@ -30,7 +30,7 @@ module.exports = (client) => {
       .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
       .setFooter({
         text: `Radiant Lotus • ${new Date().toLocaleTimeString()}`,
-        iconURL: 'https://cdn.discordapp.com/attachments/1367522678420013146/1367522900445495446/standard_1.gif'
+        iconURL: 'https://cdn.discordapp.com/attachments/1378063153027612884/1406730386905759906/913854ac485948c075b583f73908bbca.jpg?ex=68a38744&is=68a235c4&hm=bc91a610d16608df083e6372fba716676ba5badf8a460d0de9776eac773f9842&'
       });
 
     const row = new ActionRowBuilder().addComponents(
