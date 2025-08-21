@@ -1,7 +1,7 @@
 const { ActivityType } = require('discord.js');
 
 module.exports = {
-  ownerId: '853261151365627915',
+  ownerId: '1056239597614551081',
   status: {
     rotateDefault: [
       { name: 'Netflix với Tnhi', type: ActivityType.Watching },
@@ -14,3 +14,4 @@ module.exports = {
   spotifyClientId: "f71a3da30e254962965ca2a89d6f74b9",
   spotifyClientSecret: "199a619d22dd4e55a4a2c1a7a3d70e63",
 }
+
