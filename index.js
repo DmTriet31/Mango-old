@@ -64,6 +64,10 @@ const loadEventHandlers = () => {
     reactionRoleHandler(client);
     logSystem('REACTION ROLES');
 
+    const resignPanel = require('./events/resignPanel'); // hoặc './resignPanel' nếu để ngoài
+    resignPanel(client);
+    logSystem('RESIGN PANEL');
+
     console.log(`\n${colors.magenta}${colors.bright}😀 EMOJI & AFK SYSTEMS${colors.reset}`);
     console.log('─'.repeat(40));
 
