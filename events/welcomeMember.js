@@ -35,7 +35,7 @@ module.exports = (client) => {
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setLabel('.gg/radiantlotus')
+        .setLabel('.gg/Mango')
         .setStyle(ButtonStyle.Link)
         .setURL('https://discord.com/channels/1369830175700942959/1376211346294833152')
         .setEmoji('<a:RL_love:1376215865036636182>'),
