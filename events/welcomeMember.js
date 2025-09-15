@@ -77,7 +77,7 @@ module.exports = (client) => {
         const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
         try {
           await interaction.reply({
-            content: `<@${interaction.user.id}> nói: ${randomGreeting}`,
+            content: `<@${interaction.user.id}>: ${randomGreeting}`,
             ephemeral: false
           });
         } catch (err) {
