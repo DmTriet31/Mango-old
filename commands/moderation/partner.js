@@ -1,7 +1,16 @@
 const {
   SlashCommandBuilder,
-  PermissionFlagsBits
+  PermissionFlagsBits,
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle
 } = require('discord.js');
+
+const partnerRoleId = '1376211260403748987'; // Role Partner
+const outputChannelId = '1376211429719412767'; // Kênh thông báo công khai
+const staffChannelId = '1376211380427821207'; // Kênh staff (có thể đổi riêng nếu muốn)
+const applyChannelId = '1418973674752573451'; // Kênh cố định để gửi đăng ký
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -22,9 +31,6 @@ module.exports = {
     const link = interaction.options.getString('link');
     const guild = interaction.guild;
 
-    const partnerRoleId = '1376211260403748987'; // ID role partner
-    const outputChannelId = '1376211429719412767'; // ID kênh gửi thông báo
-
     const messageContent = `>>> <a:RL_staff:1376216822197784587> **Đại Diện:** <@${user.id}>
 <a:RL_ten:1376247271909232721> ${link}`;
 
@@ -34,21 +40,15 @@ module.exports = {
         return interaction.reply({ content: '❌ Không tìm thấy kênh gửi partner!', ephemeral: true });
       }
 
-      // Gửi thông báo trong kênh
       await channel.send({ content: messageContent });
 
-      // Cấp role cho người đại diện
       const member = await guild.members.fetch(user.id);
       await member.roles.add(partnerRoleId);
 
-      // Gửi DM cho đại diện
       await user.send(
         `📩 Partner đã được hoàn tất!\nBạn đã được gán role đối tác tại server **${guild.name}**.\nCảm ơn bạn đã hợp tác cùng chúng tôi!`
-      ).catch(() => {
-        console.log(`❗ Không thể gửi DM cho ${user.tag}.`);
-      });
+      ).catch(() => console.log(`❗ Không thể gửi DM cho ${user.tag}.`));
 
-      // Phản hồi riêng cho người dùng dùng lệnh
       await interaction.reply({
         content: `✅ Đã cấp role partner cho ${user.tag} và gửi thông báo.`,
         ephemeral: true
@@ -62,4 +62,66 @@ module.exports = {
       });
     }
   },
+
+  // ================== FORM ĐĂNG KÝ Ở KÊNH CỐ ĐỊNH ==================
+  async handleMessage(message, client) {
+    if (message.author.bot) return;
+    if (message.channel.id !== applyChannelId) return;
+
+    const user = message.author;
+
+    try {
+      // Hỏi link server
+      await message.channel.send(`${user}, vui lòng gửi **link mời server** của bạn:`);
+      const collected1 = await message.channel.awaitMessages({
+        filter: m => m.author.id === user.id,
+        max: 1,
+        time: 60_000
+      });
+      if (!collected1.size) return message.channel.send("⏰ Hết thời gian trả lời.");
+      const serverLink = collected1.first().content;
+
+      // Hỏi số thành viên
+      await message.channel.send(`Server của bạn hiện có **bao nhiêu thành viên**?`);
+      const collected2 = await message.channel.awaitMessages({
+        filter: m => m.author.id === user.id,
+        max: 1,
+        time: 60_000
+      });
+      if (!collected2.size) return message.channel.send("⏰ Hết thời gian trả lời.");
+      const memberCount = collected2.first().content;
+
+      // Gửi embed sang staff channel
+      const embed = new EmbedBuilder()
+        .setTitle("📩 Yêu cầu Partner mới")
+        .addFields(
+          { name: "Người đại diện", value: `<@${user.id}>`, inline: true },
+          { name: "Server Link", value: serverLink, inline: false },
+          { name: "Số thành viên", value: memberCount, inline: true }
+        )
+        .setColor("Blue")
+        .setTimestamp();
+
+      const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(`accept_${user.id}`)
+          .setLabel("✅ Chấp nhận")
+          .setStyle(ButtonStyle.Success),
+        new ButtonBuilder()
+          .setCustomId(`deny_${user.id}`)
+          .setLabel("❌ Từ chối")
+          .setStyle(ButtonStyle.Danger)
+      );
+
+      const staffChannel = message.guild.channels.cache.get(staffChannelId);
+      if (staffChannel) {
+        await staffChannel.send({ embeds: [embed], components: [row] });
+        await message.channel.send(`✅ Yêu cầu của bạn đã được gửi đến staff, vui lòng chờ duyệt.`);
+      }
+
+    } catch (err) {
+      console.error("Lỗi khi tạo form partner:", err);
+      message.channel.send("❌ Đã xảy ra lỗi khi xử lý yêu cầu.");
+    }
+  }
 };
