@@ -18,7 +18,7 @@ module.exports = {
      
             const BOT_ICON = "https://cdn.discordapp.com/attachments/1367522678420013146/1367522900445495446/standard_1.gif?ex=6814e472&is=681392f2&hm=5e8a8d444f74a6fea7bdda586a483f2e2a2278e3f55ed4a1c30c92366b0a7570&";
             const EMBED_COLOR = "#5865F2"; 
-            const FOOTER_TEXT = "Radiant Lotus • DmTriet | The Discord Operating System";
+            const FOOTER_TEXT = "Mango • DmTriet | The Discord Operating System";
             const COMMANDS_DIR = path.join(__dirname, '../../commands');
             const EXCESS_COMMANDS_DIR = path.join(__dirname, '../../excesscommands');
 
@@ -117,7 +117,7 @@ module.exports = {
 
                 
                 pages.push({
-                    title: '✨ Radiant Lotus',
+                    title: '✨ Mango',
                     description: [
                         '### THE DISCORD OPERATING SYSTEM',
                         '',
@@ -132,7 +132,7 @@ module.exports = {
                         `\`💻\` **Prefix Commands:** ${Object.values(config.excessCommands).some(v => v) ? '`Enabled`' : '`Disabled`'}`,
                         '',
                     ].join('\n'),
-                    author: { name: 'Radiant Lotus • COMMAND CENTER' },
+                    author: { name: 'Mango • COMMAND CENTER' },
                     icon: '📚'
                 });
 
@@ -381,7 +381,7 @@ module.exports = {
                     url: "https://discord.gg/em2xksJvZX"
                 })
                 .setDescription('> ⚠️ This command can only be used as a slash command!\n> Please use `/help` instead.')
-                .setFooter({ text: 'Radiant Lotust • Error' })
+                .setFooter({ text: 'Mangot • Error' })
                 .setTimestamp();
 
           
