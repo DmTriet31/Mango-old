@@ -7,7 +7,7 @@
 </p>
 
 <h1 align="center">
-  🚀 Radiant Lotus
+  🚀 Mango
 </h1>
 
 <p align="center">
