@@ -1,8 +1,10 @@
-{
-      name: "Sakura",
-      password: "Rikka",
-      host: "lavalink.aiko-project.xyz",
-      port:  2333,
-      secure: false
-      status: ✅ working
-}
+module.exports = {
+    enabled: true, 
+    lavalink: {
+        identifier: 'DmTriet',
+        password: 'Radiant Lotus',
+        host: '5.39.63.207',
+        port: 10012,
+        secure: false
+    }
+};
