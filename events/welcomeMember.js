@@ -12,7 +12,7 @@ module.exports = (client) => {
     console.log(`[✅] Thành viên mới: ${member.user.tag}`);
 
     const channel = member.guild.channels.cache.find(
-      ch => ch.name === 'welcome' || ch.id === '1376211389324202177'
+      ch => ch.name === 'welcome' || ch.id === '1444648369262821407'
     );
     if (!channel) {
       console.warn('[⚠️] Không tìm thấy kênh welcome.');
@@ -37,8 +37,8 @@ module.exports = (client) => {
       new ButtonBuilder()
         .setLabel('.gg/Mango')
         .setStyle(ButtonStyle.Link)
-        .setURL('https://discord.com/channels/1369830175700942959/1376211346294833152')
-        .setEmoji('<a:RL_love:1376215865036636182>'),
+        .setURL('https://discord.com/channels/1360197467261636750/1444648352905166849')
+        .setEmoji('<a:RL_love:1444697294761889852>'),
 
       new ButtonBuilder()
         .setCustomId('greet_member')
@@ -49,7 +49,7 @@ module.exports = (client) => {
     let sentMessage;
     try {
       sentMessage = await channel.send({
-        content: `🎉 Chào mừng <@${member.id}> đã đến với server, <@&1376211241915125813> có member mới nè!`,
+        content: `🎉 Chào mừng <@${member.id}> đã đến với server, <@&1444648190681944087> có member mới nè!`,
         embeds: [embed],
         components: [row]
       });
