@@ -2,11 +2,11 @@ const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "random",
-  description: "Random food / movie / game / music",
+  description: "Random food / movie / game / music / agent",
   execute(message, args) {
     const sub = args[0];
 
-    // Danh sách random
+    // Danh sách
     const foodList = [
       "Phở bò", "Bún chả", "Mì cay", "Pizza phô mai",
       "Sushi cá hồi", "Cơm tấm", "Lẩu Thái", "Ramen Nhật",
@@ -34,24 +34,28 @@ module.exports = {
       "Stay — The Kid LAROI & Justin Bieber",
       "Unstoppable — Sia",
       "Lovely — Billie Eilish",
-      "Shape of You — Ed Sheeran",
       "Monody — TheFatRat"
+    ];
+
+    const agentList = [
+      "Jett", "Reyna", "Viper", "Omen", "Sova",
+      "Killjoy", "Phoenix", "Raze", "Sage",
+      "Cypher", "Skye", "Chamber", "Neon",
+      "Astra", "Fade", "Breach", "Brimstone",
+      "Harbor", "Gekko", "Iso", "Deadlock",
+      "Clove", "Kay/O"
     ];
 
     const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-    // Màu embed random
+    // màu embed random
     const colors = [
-      0xff4b4b, // đỏ
-      0x4bff8a, // xanh lá
-      0x4bd0ff, // xanh biển
-      0xbd4bff, // tím
-      0xffa44b  // cam
+      0xff4b4b, 0x4bff8a, 0x4bd0ff, 0xbd4bff, 0xffa44b
     ];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const randomColor = pick(colors);
 
     if (!sub)
-      return message.reply("❌ Dùng: `.random food | movie | game | music`");
+      return message.reply("❌ Dùng: `.random food | movie | game | music | agent`");
 
     let title = "";
     let result = "";
@@ -68,14 +72,16 @@ module.exports = {
     } else if (sub === "music") {
       title = "🎵 Gợi ý bài nhạc";
       result = pick(musicList);
+    } else if (sub === "agent") {
+      title = "🎯 Random Valorant Agent";
+      result = pick(agentList);
     } else {
-      return message.reply("❌ Sai cú pháp! Dùng `.random food | movie | game | music`");
+      return message.reply("❌ Sai cú pháp! Dùng `.random food | movie | game | music | agent`");
     }
 
-    // Embed đẹp
     const embed = new EmbedBuilder()
       .setTitle(title)
-      .setDescription(`**✨ Kết quả:** \n${result}`)
+      .setDescription(`**✨ Kết quả:**\n${result}`)
       .setColor(randomColor)
       .setFooter({ text: "Mango Bot — Random Generator" })
       .setTimestamp();
