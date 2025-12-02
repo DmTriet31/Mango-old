@@ -59,16 +59,16 @@ module.exports = (client) => {
     }
 
     const greetings = [
-   `Hello người đẹp <@\${member.id}>! Vào đây warm-up cùng tụi mình không? 🔫💖`,
-  `Chào mừng <@\${member.id}>! Hy vọng aim của bạn hôm nay không run như tim mình lúc thấy bạn 😳✨`,
-  `Heyy <@\${member.id}>! Vô server chơi nè—nhớ đừng bắn headshot tụi mình ngoài đời nha 😼💘`,
-  `Ô kìa, tuyển thủ <@\${member.id}> xuất hiện! Rank gì không biết nhưng nhìn là thấy đỉnh rồi 😎🔥`,
-  `Welcome <@\${member.id}>! Chúc bạn xinh đẹp như 1 pha Ace clutch 1v5 💫`,
-  `<@\${member.id}> vào rồi! Server hôm nay auto +5% accuracy 😳🌸`,
-  `Wassup <@\${member.id}>! Chúc bạn win streak đỏ map như đôi má bạn 😌❤️`,
-  `Hello <@\${member.id}>! Nói chuyện cho vui chứ đừng flash đồng đội như Phoenix nha 😭💗`,
-  `<@\${member.id}> đã đến! Mong bạn bắn chuẩn như cách bạn làm tim mình lệch nhịp 🔥💞`,
-  `Chào mừng <@\${member.id}>~ Luôn top frag cả trong game lẫn ngoài đời nha 😏✨`
+   `Hello người đẹp <@${member.id}>! Vào đây warm-up cùng tụi mình không? 🔫💖`,
+  `Chào mừng <@${member.id}>! Hy vọng aim của bạn hôm nay không run như tim mình lúc thấy bạn 😳✨`,
+  `Heyy <@${member.id}>! Vô server chơi nè—nhớ đừng bắn headshot tụi mình ngoài đời nha 😼💘`,
+  `Ô kìa, tuyển thủ <@${member.id}> xuất hiện! Rank gì không biết nhưng nhìn là thấy đỉnh rồi 😎🔥`,
+  `Welcome <@${member.id}>! Chúc bạn xinh đẹp như 1 pha Ace clutch 1v5 💫`,
+  `<@${member.id}> vào rồi! Server hôm nay auto +5% accuracy 😳🌸`,
+  `Wassup <@${member.id}>! Chúc bạn win streak đỏ map như đôi má bạn 😌❤️`,
+  `Hello <@${member.id}>! Nói chuyện cho vui chứ đừng flash đồng đội như Phoenix nha 😭💗`,
+  `<@${member.id}> đã đến! Mong bạn bắn chuẩn như cách bạn làm tim mình lệch nhịp 🔥💞`,
+  `Chào mừng <@${member.id}>~ Luôn top frag cả trong game lẫn ngoài đời nha 😏✨`
     ];
 
     const collector = sentMessage.createMessageComponentCollector({
