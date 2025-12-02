@@ -59,7 +59,7 @@ module.exports = (client) => {
     }
 
     const greetings = [
-   `Hello người đẹp <@${member.id}>! Vào đây warm-up cùng tụi mình không? 🔫💖`,
+  `Hello người đẹp <@${member.id}>! Vào đây warm-up cùng tụi mình không? 🔫💖`,
   `Chào mừng <@${member.id}>! Hy vọng aim của bạn hôm nay không run như tim mình lúc thấy bạn 😳✨`,
   `Heyy <@${member.id}>! Vô server chơi nè—nhớ đừng bắn headshot tụi mình ngoài đời nha 😼💘`,
   `Ô kìa, tuyển thủ <@${member.id}> xuất hiện! Rank gì không biết nhưng nhìn là thấy đỉnh rồi 😎🔥`,
