@@ -153,7 +153,7 @@ const serverBannerURL = "https://cdn.discordapp.com/attachments/1406732260639510
 const welcomeEmbed = new EmbedBuilder()
     .setTitle("୨ <:RL_Lounge_bow:1376217725994663957> ୧〃 ➜ *Thành viên mới*")
 .setDescription(
-  `*${member}* đã tham gia server! ﹒ ><a:RL_pinkheart:1376249583847477372>`)
+  `*${member}* đã tham gia server! ﹒ ><a:pink_heart:1447004006248349756>`)
     .setColor(Math.floor(Math.random() * 16777215))
     .setThumbnail(user.displayAvatarURL({ dynamic: true }))
     .setImage(serverBannerURL)
@@ -235,5 +235,6 @@ module.exports = async function memberJoinHandler(client) {
         }
     });
 };
+
 
 
