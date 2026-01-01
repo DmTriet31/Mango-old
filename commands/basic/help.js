@@ -18,7 +18,7 @@ module.exports = {
      
             const BOT_ICON = "https://cdn.discordapp.com/attachments/1367522678420013146/1367522900445495446/standard_1.gif?ex=6814e472&is=681392f2&hm=5e8a8d444f74a6fea7bdda586a483f2e2a2278e3f55ed4a1c30c92366b0a7570&";
             const EMBED_COLOR = "#5865F2"; 
-            const FOOTER_TEXT = "Mango • DmTriet | The Discord Operating System";
+            const FOOTER_TEXT = "Mango • DmTriet | Hệ điều hành Discord";
             const COMMANDS_DIR = path.join(__dirname, '../../commands');
             const EXCESS_COMMANDS_DIR = path.join(__dirname, '../../excesscommands');
 
@@ -119,7 +119,7 @@ module.exports = {
                 pages.push({
                     title: '✨ Mango',
                     description: [
-                        '### THE DISCORD OPERATING SYSTEM',
+                        '### Hệ điều hành Discord,
                         '',
                         '> The ultimate Discord bot for all your server needs',
                         '',
@@ -202,7 +202,7 @@ module.exports = {
                     .setAuthor({
                         name: page.author.name,
                         iconURL: BOT_ICON,
-                        url: "https://discord.gg/em2xksJvZX"
+                        url: "https://discord.gg/hZM6zS9Km7"
                     })
                     .setImage(helpBanner)
                     .setFooter({ text: `${FOOTER_TEXT} • Page ${currentPage + 1}/${currentSet.length}` })
@@ -378,7 +378,7 @@ module.exports = {
                 .setAuthor({
                     name: "Command Error",
                     iconURL: cmdIcons.dotIcon,
-                    url: "https://discord.gg/em2xksJvZX"
+                    url: "https://discord.gg/hZM6zS9Km7"
                 })
                 .setDescription('> ⚠️ This command can only be used as a slash command!\n> Please use `/help` instead.')
                 .setFooter({ text: 'Mangot • Error' })
