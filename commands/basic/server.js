@@ -1,25 +1,3 @@
-/*
-
-☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-                                                 
-  _________ ___ ___ ._______   _________    
- /   _____//   |   \|   \   \ /   /  _  \   
- \_____  \/    ~    \   |\   Y   /  /_\  \  
- /        \    Y    /   | \     /    |    \ 
-/_______  /\___|_  /|___|  \___/\____|__  / 
-        \/       \/                     \/  
-                    
-DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
-YouTube : https://www.youtube.com/@GlaceYT                         
-
-Command Verified : ✓  
-Website        : ssrr.tech  
-Test Passed    : ✓
-
-☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-*/
-
-
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const {
     EmbedBuilder,
@@ -43,17 +21,17 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('info')
-                .setDescription('Show detailed server information with pagination.')
+                .setDescription('Hiển thị thông tin chi tiết của server kèm phân trang.')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('icon')
-                .setDescription('Show the server icon.')
+                .setDescription('Hiển thị icon của server.')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('banner')
-                .setDescription('Show the server banner.')
+                .setDescription('Hiển thị banner của server.')
         ),
     async execute(interaction) {
         if (interaction.isCommand && interaction.isCommand()) {
@@ -62,7 +40,7 @@ module.exports = {
         const server = interaction.guild;
         if (!server) return interaction.editReply(lang.serverInfoError);
 
-        // Check which subcommand was used
+        // Kiểm tra subcommand được sử dụng
         const subcommand = interaction.options.getSubcommand();
         if (subcommand === 'info') {
             try {
@@ -80,46 +58,46 @@ module.exports = {
                 const boostCount = server.premiumSubscriptionCount || 0;
                 const boostLevel = server.premiumTier || 0;
         
-                // === PAGE 1: Basic Server Info ===
+                // === TRANG 1: Thông tin cơ bản ===
                 const baseEmbed = new EmbedBuilder()
                     .setColor('#FFFFFF')
-                    .setAuthor({ name: 'Server Info', iconURL: server.iconURL({ dynamic: true }) })
+                    .setAuthor({ name: 'Thông tin Server', iconURL: server.iconURL({ dynamic: true }) })
                     .setThumbnail(server.iconURL({ dynamic: true, size: 1024 }))
                     .addFields([
-                        { name: '📛 Server Name', value: `\`${server.name}\``, inline: true },
-                        { name: '👑 Owner', value: `<@${owner.id}>`, inline: true },
-                        { name: '🆔 Server ID', value: `\`${server.id}\``, inline: true },
-                        { name: '👥 Members', value: `\`${server.memberCount}\``, inline: true },
-                        { name: '🤖 Bots', value: `\`${server.members.cache.filter(m => m.user.bot).size}\``, inline: true },
-                        { name: '🚀 Boosts', value: `\`${boostCount} (Level ${boostLevel})\``, inline: true },
-                        { name: '📂 Categories', value: `\`${categories}\``, inline: true },
-                        { name: '💬 Text Channels', value: `\`${textChannels}\``, inline: true },
-                        { name: '🔊 Voice Channels', value: `\`${voiceChannels}\``, inline: true },
-                        { name: '🎭 Roles', value: `\`${roles.size}\``, inline: true },
-                        { name: '😀 Emojis', value: `\`${emojis.size}\``, inline: true },
-                        { name: '🆕 Created On', value: `<t:${Math.floor(server.createdTimestamp / 1000)}:F>`, inline: false },
+                        { name: '📛 Tên Server', value: `\`${server.name}\``, inline: true },
+                        { name: '👑 Chủ Server', value: `<@${owner.id}>`, inline: true },
+                        { name: '🆔 ID Server', value: `\`${server.id}\``, inline: true },
+                        { name: '👥 Thành viên', value: `\`${server.memberCount}\``, inline: true },
+                        { name: '🤖 Bot', value: `\`${server.members.cache.filter(m => m.user.bot).size}\``, inline: true },
+                        { name: '🚀 Boost', value: `\`${boostCount} (Cấp ${boostLevel})\``, inline: true },
+                        { name: '📂 Danh mục', value: `\`${categories}\``, inline: true },
+                        { name: '💬 Kênh chữ', value: `\`${textChannels}\``, inline: true },
+                        { name: '🔊 Kênh thoại', value: `\`${voiceChannels}\``, inline: true },
+                        { name: '🎭 Vai trò', value: `\`${roles.size}\``, inline: true },
+                        { name: '😀 Emoji', value: `\`${emojis.size}\``, inline: true },
+                        { name: '🆕 Ngày tạo', value: `<t:${Math.floor(server.createdTimestamp / 1000)}:F>`, inline: false },
                     ])
                     .setTimestamp();
         
-                // === PAGE 2: Roles ===
+                // === TRANG 2: Vai trò ===
                 const roleEmbed = new EmbedBuilder()
                     .setColor('#FFFFFF')
-                    .setTitle('🎭 Roles')
-                    .setDescription(roles.size > 0 ? roles.map(role => `<@&${role.id}>`).join(', ') : 'No roles available.');
+                    .setTitle('🎭 Vai trò')
+                    .setDescription(roles.size > 0 ? roles.map(role => `<@&${role.id}>`).join(', ') : 'Không có vai trò nào.');
         
-                // === PAGE 3+: Emojis, Chunked in 25s ===
+                // === TRANG 3+: Emoji, chia mỗi trang 25 cái ===
                 const emojiChunks = chunkArray(emojis.map(e => e.toString()), 25);
                 const emojiEmbeds = emojiChunks.map((chunk, i) =>
                     new EmbedBuilder()
                         .setColor('#FFFFFF')
-                        .setTitle(`😀 Emojis (Page ${i + 1})`)
+                        .setTitle(`😀 Emoji (Trang ${i + 1})`)
                         .setDescription(chunk.join(' '))
                 );
         
-                // Combine all pages
+                // Gộp tất cả trang
                 const embeds = [baseEmbed, roleEmbed, ...emojiEmbeds];
         
-                // Buttons
+                // Nút điều hướng
                 const row = new ActionRowBuilder().addComponents(
                     new ButtonBuilder().setCustomId('previous').setLabel('⬅️').setStyle(ButtonStyle.Secondary).setDisabled(true),
                     new ButtonBuilder().setCustomId('next').setLabel('➡️').setStyle(ButtonStyle.Secondary)
@@ -145,17 +123,17 @@ module.exports = {
                     try {
                         await interaction.editReply({ components: [] });
                     } catch (err) {
-                        console.error('Failed to remove buttons after collector ended:', err);
+                        console.error('Không thể xoá nút sau khi collector kết thúc:', err);
                     }
                 });
         
             } catch (error) {
-                console.error('Error fetching server information:', error);
-                return interaction.editReply({ content: '❌ Error fetching server information.' });
+                console.error('Lỗi khi lấy thông tin server:', error);
+                return interaction.editReply({ content: '❌ Không thể lấy thông tin server.' });
             }
         }
         else if (subcommand === 'icon') {
-            // Create an embed with the server icon
+            // Tạo embed hiển thị icon server
             const iconURL = server.iconURL({ format: 'png', dynamic: true, size: 1024 });
             const embed = new EmbedBuilder()
                 .setColor('#FFFFFF')
@@ -165,7 +143,7 @@ module.exports = {
             await interaction.editReply({ embeds: [embed] });
         } 
         else if (subcommand === 'banner') {
-            // Create an embed with the server banner (if available)
+            // Tạo embed hiển thị banner server (nếu có)
             const bannerURL = server.bannerURL({ format: 'png', dynamic: true, size: 1024 });
             if (!bannerURL) {
                 const embed = new EmbedBuilder()
@@ -184,35 +162,14 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor('#3498db')
             .setAuthor({ 
-                name: "Alert!", 
+                name: "Cảnh báo!", 
                 iconURL: cmdIcons.dotIcon,
-                url: "https://discord.gg/xQF9f9yUEM"
+                url: "https://discord.gg/hZM6zS9Km7"
             })
-            .setDescription('- This command can only be used through slash command!\n- Please use `/server`')
+            .setDescription('- Lệnh này chỉ sử dụng được bằng slash command!\n- Vui lòng dùng `/server`')
             .setTimestamp();
 
         await interaction.reply({ embeds: [embed] });
     } 
     },
 };
-
-/*
-
-☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-                                                 
-  _________ ___ ___ ._______   _________    
- /   _____//   |   \|   \   \ /   /  _  \   
- \_____  \/    ~    \   |\   Y   /  /_\  \  
- /        \    Y    /   | \     /    |    \ 
-/_______  /\___|_  /|___|  \___/\____|__  / 
-        \/       \/                     \/  
-                    
-DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
-YouTube : https://www.youtube.com/@GlaceYT                         
-
-Command Verified : ✓  
-Website        : ssrr.tech  
-Test Passed    : ✓
-
-☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-*/
