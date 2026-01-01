@@ -8,7 +8,7 @@ const { helpBanner } = require('../../UI/banners/SetupBanners');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('help')
-        .setDescription('Displays the command list and bot information'),
+        .setDescription('Hiển thị danh sách lệnh và thông tin bot'),
 
     async execute(interaction) {
       
@@ -34,7 +34,6 @@ module.exports = {
                 games: "🎲",
                 settings: "🔧",
                 misc: "📦"
-                // Add more category-specific icons as needed
             };
         
             const getEnabledCategories = (configSet) =>
@@ -65,7 +64,6 @@ module.exports = {
                                         const dataJSON = cmd.data.toJSON();
                                         if (dataJSON.options && Array.isArray(dataJSON.options)) {
                                             for (const option of dataJSON.options) {
-                                               
                                                 if (option.type === 1) {
                                                     subcommands.push(option.name);
                                                 } else if (option.type === 2 && option.options) {
@@ -78,12 +76,12 @@ module.exports = {
                                         }
                                     }
                                     return {
-                                        name: cmd.data?.name || cmd.name || 'unnamed-command',
-                                        description: cmd.data?.description || cmd.description || 'No description provided',
+                                        name: cmd.data?.name || cmd.name || 'lệnh-không-tên',
+                                        description: cmd.data?.description || cmd.description || 'Không có mô tả',
                                         subcommands: subcommands
                                     };
                                 } catch (error) {
-                                    console.error(`Error loading command ${file} in ${category}:`, error);
+                                    console.error(`Lỗi tải lệnh ${file} trong ${category}:`, error);
                                     return null;
                                 }
                             })
@@ -93,7 +91,7 @@ module.exports = {
                             commandData[category] = commands;
                         }
                     } catch (error) {
-                        console.error(`Error loading ${category} commands:`, error);
+                        console.error(`Lỗi tải module ${category}:`, error);
                     }
                 }
                 return commandData;
@@ -119,20 +117,20 @@ module.exports = {
                 pages.push({
                     title: '✨ Mango',
                     description: [
-                        '### Hệ điều hành Discord,
+                        '### Hệ điều hành Discord',
                         '',
-                        '> The ultimate Discord bot for all your server needs',
+                        '> Bot Discord toàn diện cho mọi nhu cầu máy chủ',
                         '',
-                        '**BOT STATISTICS**',
-                        `\`🧠\` **Version:** 1.2.2`,
-                        `\`🛠️\` **Total Commands:** ${totalCount}`,
-                        `\`⚙️\` **Commands Loaded:** ${totalCommandsLoaded}`,
-                        `\`📌\` **Master Commands:** ${masterCount}`,
-                        `\`📎\` **Sub Commands:** ${subCount}`,
-                        `\`💻\` **Prefix Commands:** ${Object.values(config.excessCommands).some(v => v) ? '`Enabled`' : '`Disabled`'}`,
+                        '**THỐNG KÊ BOT**',
+                        `\`🧠\` **Phiên bản:** 1.2.2`,
+                        `\`🛠️\` **Tổng số lệnh:** ${totalCount}`,
+                        `\`⚙️\` **Lệnh đã tải:** ${totalCommandsLoaded}`,
+                        `\`📌\` **Lệnh chính:** ${masterCount}`,
+                        `\`📎\` **Lệnh phụ:** ${subCount}`,
+                        `\`💻\` **Lệnh Prefix:** ${Object.values(config.excessCommands).some(v => v) ? '`Bật`' : '`Tắt`'}`,
                         '',
                     ].join('\n'),
-                    author: { name: 'Mango • COMMAND CENTER' },
+                    author: { name: 'Mango • TRUNG TÂM LỆNH' },
                     icon: '📚'
                 });
 
@@ -140,20 +138,17 @@ module.exports = {
                 for (const [category, commands] of Object.entries(commandSet)) {
                     if (commands.length === 0) continue;
 
-                
                     const totalSubcommands = commands.reduce((acc, cmd) => {
                         return acc + (cmd.subcommands ? cmd.subcommands.length : 0);
                     }, 0);
                     const totalNoOfCommands = commands.length + totalSubcommands;
                     
-                
                     const categoryIcon = CATEGORY_ICONS[category.toLowerCase()] || "📁";
                     
                     const commandLines = commands.map(cmd => {
                         let line = `\`${cmd.name}\` • ${cmd.description}`;
                         if (cmd.subcommands && cmd.subcommands.length > 0) {
-                          
-                            line += `\n> **Subcommands (${cmd.subcommands.length}):**\n`;
+                            line += `\n> **Lệnh phụ (${cmd.subcommands.length}):**\n`;
                             cmd.subcommands.forEach(subcmd => {
                                 line += `> • \`${subcmd}\`\n`;
                             });
@@ -162,19 +157,19 @@ module.exports = {
                     });
 
                     pages.push({
-                        title: `${categoryIcon} ${category.charAt(0).toUpperCase() + category.slice(1)} Commands`,
+                        title: `${categoryIcon} Lệnh ${category.charAt(0).toUpperCase() + category.slice(1)}`,
                         description: [
-                            `### ${category.toUpperCase()} COMMAND MODULE`,
+                            `### MODULE ${category.toUpperCase()}`,
                             '',
-                            '**MODULE STATISTICS**',
-                            `\`📊\` **Total Commands:** ${totalNoOfCommands}`,
-                            `\`🔍\` **Master Commands:** ${commands.length}`,
-                            `\`🔗\` **Integrated Subcommands:** ${totalSubcommands}`,
-                            `\`⌨️\` **Usage Type:** ${type === 'slash' ? '`Slash Commands`' : `\`Prefix: ${config.prefix}\``}`,
+                            '**THỐNG KÊ MODULE**',
+                            `\`📊\` **Tổng lệnh:** ${totalNoOfCommands}`,
+                            `\`🔍\` **Lệnh chính:** ${commands.length}`,
+                            `\`🔗\` **Lệnh phụ:** ${totalSubcommands}`,
+                            `\`⌨️\` **Cách dùng:** ${type === 'slash' ? '`Slash Command`' : `\`Prefix: ${config.prefix}\``}`,
                             ''
                         ].join('\n'),
                         commands: commandLines,
-                        author: { name: `${category.toUpperCase()} • COMMAND MODULE` },
+                        author: { name: `${category.toUpperCase()} • MODULE LỆNH` },
                         icon: categoryIcon 
                     });
                 }
@@ -205,10 +200,9 @@ module.exports = {
                         url: "https://discord.gg/hZM6zS9Km7"
                     })
                     .setImage(helpBanner)
-                    .setFooter({ text: `${FOOTER_TEXT} • Page ${currentPage + 1}/${currentSet.length}` })
+                    .setFooter({ text: `${FOOTER_TEXT} • Trang ${currentPage + 1}/${currentSet.length}` })
                     .setTimestamp();
 
-        
                 if (page.commands && page.commands.length > 0) {
                     const joinedCommands = page.commands.join('\n\n');
                     if (joinedCommands.length > 1024) {
@@ -217,10 +211,9 @@ module.exports = {
                         let fieldCount = 1;
 
                         for (const line of page.commands) {
-                  
                             if (fieldValue.length + line.length + 2 > 1024) {
                                 fields.push({ 
-                                    name: `Command List (Part ${fieldCount})`, 
+                                    name: `Danh sách lệnh (Phần ${fieldCount})`, 
                                     value: fieldValue.trim() 
                                 });
                                 fieldCount++;
@@ -231,13 +224,13 @@ module.exports = {
                         }
                         if (fieldValue) {
                             fields.push({ 
-                                name: `Command List ${fieldCount > 1 ? `(Part ${fieldCount})` : ''}`, 
+                                name: `Danh sách lệnh ${fieldCount > 1 ? `(Phần ${fieldCount})` : ''}`, 
                                 value: fieldValue.trim() 
                             });
                         }
                         embed.setFields(fields);
                     } else {
-                        embed.setFields([{ name: '💎 Available Commands', value: joinedCommands }]);
+                        embed.setFields([{ name: '💎 Các lệnh khả dụng', value: joinedCommands }]);
                     }
                 }
                 return embed;
@@ -245,38 +238,36 @@ module.exports = {
 
            
             const createComponents = () => {
-              
                 const row1 = new ActionRowBuilder().addComponents(
                     new StringSelectMenuBuilder()
                         .setCustomId('pageSelect')
-                        .setPlaceholder('📋 Select a category...')
+                        .setPlaceholder('📋 Chọn danh mục...')
                         .addOptions(currentSet.map((page, i) => {
                             return {
                                 label: page.title.replace(/^[^\w\s]\s*/, ''), 
                                 value: i.toString(),
-                                description: `View ${page.title.replace(/^[^\w\s]\s*/, '')} section`,
+                                description: `Xem mục ${page.title.replace(/^[^\w\s]\s*/, '')}`,
                                 emoji: page.icon 
                             };
                         }))
                 );
 
-              
                 const row2 = new ActionRowBuilder().addComponents(
                     new ButtonBuilder()
                         .setCustomId('previous')
-                        .setLabel('Previous')
+                        .setLabel('Trang trước')
                         .setEmoji('⬅️')
                         .setStyle(ButtonStyle.Secondary)
                         .setDisabled(currentPage === 0),
                     new ButtonBuilder()
                         .setCustomId('next')
-                        .setLabel('Next')
+                        .setLabel('Trang sau')
                         .setEmoji('➡️')
                         .setStyle(ButtonStyle.Secondary)
                         .setDisabled(currentPage === currentSet.length - 1),
                     new ButtonBuilder()
                         .setCustomId('switchMode')
-                        .setLabel(isPrefix ? 'Slash Commands' : 'Prefix Commands')
+                        .setLabel(isPrefix ? 'Lệnh Slash' : 'Lệnh Prefix')
                         .setEmoji('🔄')
                         .setStyle(ButtonStyle.Primary)
                 );
@@ -298,13 +289,12 @@ module.exports = {
                 try {
                     if (i.user.id !== interaction.user.id) {
                         await i.reply({ 
-                            content: `⚠️ Only ${interaction.user.tag} can interact with these controls.`, 
+                            content: `⚠️ Chỉ ${interaction.user.tag} mới được sử dụng bảng điều khiển này.`, 
                             ephemeral: true 
                         });
                         return;
                     }
 
-                
                     await i.deferUpdate();
 
                     if (i.isStringSelectMenu()) {
@@ -330,61 +320,33 @@ module.exports = {
                         components: createComponents()
                     });
                 } catch (error) {
-                    //console.error('Error handling interaction:', error);
-                 
                     try {
                         const errorMethod = i.replied || i.deferred ? i.editReply : i.reply;
                         await errorMethod.call(i, {
-                            content: '⚠️ An error occurred while processing your interaction. Please try again.',
+                            content: '⚠️ Đã xảy ra lỗi khi xử lý thao tác. Vui lòng thử lại.',
                             ephemeral: true
                         });
-                    } catch (secondaryError) {
-                        //console.error('Failed to send error response:', secondaryError);
-                    }
+                    } catch (secondaryError) {}
                 }
             });
 
             collector.on('end', () => {
-                try {
-                
-                    const disabledComponents = createComponents().map(row => {
-                        const updatedRow = new ActionRowBuilder();
-                        row.components.forEach(component => {
-                            if (component.data.type === 2) {
-                                updatedRow.addComponents(
-                                    ButtonBuilder.from(component.data).setDisabled(true)
-                                );
-                            } else if (component.data.type === 3) {
-                                updatedRow.addComponents(
-                                    StringSelectMenuBuilder.from(component.data).setDisabled(true)
-                                );
-                            }
-                        });
-                        return updatedRow;
-                    });
-                    
-                    interaction.editReply({ 
-                        content: "⏱️ Help command session expired. Use `/help` again to restart."
-                    }).catch((error) => {
-                        //console.error('Failed to update expired components:', error);
-                    });
-                } catch (error) {
-                    //console.error('Error in collector end handler:', error);
-                }
+                interaction.editReply({ 
+                    content: "⏱️ Phiên trợ giúp đã hết hạn. Dùng lại `/help` để mở lại."
+                }).catch(() => {});
             });
         } else {
             const embed = new EmbedBuilder()
                 .setColor('#ff3860')
                 .setAuthor({
-                    name: "Command Error",
+                    name: "Lỗi lệnh",
                     iconURL: cmdIcons.dotIcon,
                     url: "https://discord.gg/hZM6zS9Km7"
                 })
-                .setDescription('> ⚠️ This command can only be used as a slash command!\n> Please use `/help` instead.')
-                .setFooter({ text: 'Mangot • Error' })
+                .setDescription('> ⚠️ Lệnh này chỉ dùng được với slash command!\n> Vui lòng sử dụng `/help`.')
+                .setFooter({ text: 'Mango • Lỗi' })
                 .setTimestamp();
 
-          
             await interaction.editReply({ embeds: [embed], ephemeral: true });
         }
     }
