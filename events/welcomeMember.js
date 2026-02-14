@@ -12,7 +12,7 @@ module.exports = (client) => {
     console.log(`[✅] Thành viên mới: ${member.user.tag}`);
 
     const channel = member.guild.channels.cache.find(
-      ch => ch.name === 'welcome' || ch.id === '1444648369262821407'
+      ch => ch.name === 'welcome' || ch.id === '1472210246054187172'
     );
     if (!channel) {
       console.warn('[⚠️] Không tìm thấy kênh welcome.');
