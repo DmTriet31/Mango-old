@@ -35,7 +35,7 @@ module.exports = async function memberLeaveHandler(client) {
             const channel = member.guild.channels.cache.get(leaveSettings.leaveChannelId);
             if (channel) {
                 const embed = new EmbedBuilder()
-                    .setTitle('୨ <:RL_Lounge_bow:1376217725994663957> ୧〃 ➜ *New Leave*')
+                    .setTitle('<a:MG_zap:1447004479013781665> ➜ *New Leave*')
                     .setColor('#FF9900')
                     .setDescription(`Con Quỷ ${member.user.tag} đã bỏ rơi chúng ta.`)
                     .setThumbnail(member.user.displayAvatarURL())
@@ -56,3 +56,4 @@ module.exports = async function memberLeaveHandler(client) {
         }
     });
 };
+
